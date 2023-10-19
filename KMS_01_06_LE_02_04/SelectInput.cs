@@ -9,11 +9,12 @@ namespace KMS_01_06_LE_02_04
         {
             string inputUser = "";
             bool checkInput = false;
-            while(!checkInput)
-            {                       
+            while (!checkInput)
+            {
                 Console.WriteLine(input);
                 inputUser = Console.ReadLine();
-                if (!Regex.IsMatch(inputUser, "[^a-zA-Z0-9]+"))
+                if (!Regex.IsMatch(inputUser, "[^a-zA-Z]+"))
+
                 {
                     checkInput = true;
                 }
@@ -23,28 +24,36 @@ namespace KMS_01_06_LE_02_04
                 }
             }
             return inputUser;
-           
+
         }
         public static int GetIntInput(string input)
         {
             int value = 0;
             bool checkInput = false;
-            while(!checkInput)
+
+            while (!checkInput)
             {
                 Console.WriteLine(input);
-                string inputUser = Console.ReadLine();
                 try
                 {
-                    value = Convert.ToInt32(inputUser);
-                    checkInput = true;
+                    string inputUser = Console.ReadLine();
+                    if (int.TryParse(inputUser, out int intValue))
+                    {
+                        value = intValue;
+                        checkInput = true;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Geben Sie eine gültige Ganzzahl ein!");
+                    }
                 }
                 catch (FormatException)
                 {
-                    Console.WriteLine("Geben Sie nur Ganzzahlen ein:");
+                    Console.WriteLine("Ungültige Eingabe!");
+
                 }
             }
             return value;
         }
-
     }
 }
